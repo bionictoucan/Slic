@@ -59,6 +59,8 @@ def parse_dataset(dataset):
             args = np.argwhere(dataset.label == l) #finds all of the indices where the given label is l and returns an array of these indices
     
             sol_list.append(solar_dataset(source="numpy",data_arr=dataset.data[args],label_arr=dataset.label[args]))
+
+            return sol_list
     elif type(dataset) == str:
         s_dataset = solar_dataset(source="from_file",dat_file=dataset)
 
@@ -66,3 +68,5 @@ def parse_dataset(dataset):
             args = np.argwhere(s_dataset.label == l)
 
             sol_list.append(solar_dataset(source="numpy",data_arr=s_dataset.data[args],label_arr=s_dataset.label[args]))
+
+            return sol_list
