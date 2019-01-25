@@ -5,6 +5,17 @@ from scipy.misc import imresize
 from tqdm import tqdm
 
 def train_test_data(dataset,percentage_split=10,save_dir="./"):
+    '''
+    Parameters
+    ----------
+    dataset : str
+        The path to the dataset to be prepped.
+    percentage_split : int
+        The percentage to be used in the validation. Default is 10.
+    save_dir : str
+        The directory to save the files to. Default is the current working directory.
+    '''
+
     if dataset is None:
         raise TypeError("Please tell us what dataset you would like prepped!")
     
