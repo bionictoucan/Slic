@@ -58,5 +58,6 @@ if __name__ == "__main__":
     parser.add_argument("--dataset",help="The path to the dataset to be loaded in.",default=None)
     parser.add_argument("--percent_split",help="The percentage of the dataset to put in the validation.",default=10)
     parser.add_argument("--save_dir",help="The directory to save the prepped datasets to.",default="./")
+    args = parser.parse_args()
 
     train_test_data(dataset=args.dataset,percentage_split=args.percent_split,save_dir=args.save_dir)
