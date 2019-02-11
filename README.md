@@ -5,4 +5,3 @@
 ## Usage
 
 ## Publications
-&alpha; $\alpha$
