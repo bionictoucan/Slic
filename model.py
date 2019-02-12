@@ -78,6 +78,8 @@ class solar_classifier(nn.Module):
         out = self.max_pool(out)
         out = out.view(out.size(0),-1)
         out = self.classifier(out)
+        
+        return out
 
     def graph(self):
         return nn.Sequential(self.layer1,self.layer2,self.maxPool,self.layer3,self.layer4,self.maxPool,self.layer5,self.layer6,self.maxPool,self.layer7,self.layer8, self.maxPool,self.layer8,self.layer8,self.maxPool,self.classifier)
