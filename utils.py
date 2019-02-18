@@ -6,8 +6,17 @@ import numpy as np
 from tqdm import tqdm
 
 def solar_classification(model,device,weights,data,features=None):
-    dataset = solar_dataset(source="numpy",data_arr=data)
+    dataset = solar_dataset(source="numpy",data_arr=data,test=True)
+    idxs = np.zeros(dataset.__len__())
     labels = np.zeros(dataset.__len__())
+    features_dict = {}
+    label_dict = {
+        "filaments" : 0,
+        "flares" : 1,
+        "prominences" : 2,
+        "quiet" : 3,
+        "sunspots" : 4
+    }
     data_loader = DataLoader(dataset,batch_size=1)
 
     model = solar_classifier()
@@ -16,13 +25,23 @@ def solar_classification(model,device,weights,data,features=None):
     model.eval()
 
     with torch.no_grad():
-        for i, images in enumerate(data_loader):
+        for idx, images in enumerate(data_loader):
             images = images.float().to(device)
             output = model(images)
             _, predicted = torch.max(output.data,1)
-            labels[i] = predicted.item()
+            idxs[idx] = idx
+            labels[idx] = predicted.item()
 
     if features==None:
-        return labels
+        features_dict.update({
+            "filaments" : idxs[np.where(labels==0)],
+            "flares" : idxs[np.where(labels==1)],
+            "prominences" : idxs[np.where(labels==2)],
+            "quiet" : idxs[np.where(labels==3)],
+            "sunspots" : idxs[np.where(labels==4)]
+        })
     else:
-        
+        for f in features:
+            features_dict.update({f : idxs[np.where(labels==label_dict[f])]})
+
+    return features_dict
