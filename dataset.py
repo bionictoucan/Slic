@@ -2,7 +2,7 @@ import numpy as np
 from torch.utils.data import Dataset
 
 class solar_dataset(Dataset):
-    def __init__(self,source="from_file",dat_file=None,data_arr=None,label_arr=,test=False):
+    def __init__(self,source="from_file",dat_file=None,data_arr=None,label_arr=None,test=False):
         super(solar_dataset,self).__init__()
         self.test = test
         if not self.test:
