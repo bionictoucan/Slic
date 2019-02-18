@@ -29,7 +29,7 @@ class solar_dataset(Dataset):
         if not self.test:
             return len(self.label)
         else:
-            return data.shape[0]
+            return self.data.shape[0]
 
     def __getitem__(self,idx):
         if not self.test:
