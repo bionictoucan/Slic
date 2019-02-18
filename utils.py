@@ -4,6 +4,20 @@ from model import solar_classifier
 from torch.utils.data import DataLoader
 import numpy as np
 from tqdm import tqdm
+import sunpy.cm as cm
+import matplotlib.pyplot as plt
+
+def softmax(x):
+    '''
+    A function for calculating the softmax probability an output vector of the network.
+    
+    Parameters
+    ----------
+    x : numpy array
+        A numpy array containing the pre-softmax probabilities i.e. the output of the network.
+    '''
+    ex = np.exp(x)
+    return ex / ex.sum()
 
 def solar_classification(weights,data,features=None):
     dataset = solar_dataset(source="numpy",data_arr=data,test=True)
@@ -34,15 +48,15 @@ def solar_classification(weights,data,features=None):
             _, predicted = torch.max(output.data,1)
             idxs[idx] = idx
             labels[idx] = predicted.item()
-            hists[idx] = output.cpu().numpy()
+            hists[idx] = softmax(output.cpu().numpy())
 
     if features==None:
         features_dict.update({
-            "filaments" : idxs[np.where(labels==0)],
-            "flares" : idxs[np.where(labels==1)],
-            "prominences" : idxs[np.where(labels==2)],
-            "quiet" : idxs[np.where(labels==3)],
-            "sunspots" : idxs[np.where(labels==4)]
+            "filaments" : idxs[np.where(labels==0)].astype(np.int16),
+            "flares" : idxs[np.where(labels==1)].astype(np.int16),
+            "prominences" : idxs[np.where(labels==2)].astype(np.int16),
+            "quiet" : idxs[np.where(labels==3)].astype(np.int16),
+            "sunspots" : idxs[np.where(labels==4)].astype(np.int16)
         })
 
         hist_dict.update({
@@ -54,7 +68,18 @@ def solar_classification(weights,data,features=None):
         })
     else:
         for f in features:
-            features_dict.update({f : idxs[np.where(labels==label_dict[f])]})
+            features_dict.update({f : idxs[np.where(labels==label_dict[f])].astype(np.int16)})
             hist_dict.update({f : hists[np.where(labels==label_dict[f])]})
 
     return features_dict, hist_dict
+
+def plot_image(data,feature_dict,feature,idx,cmap="hinodesotintensity"):
+    if len(data.shape) == 4:
+        data = data.squeeze()
+    plt.imshow(data[feature_dict[feature][idx]],origin="bottom",cmap=cmap)
+
+def plot_hist(hist_dict,feature,idx):
+    plt.bar(np.arange(5),hist_dict[feature][idx],tick_label=["Filaments","Flare ribbon","Prominence","Quiet Sun","Sunspot"])
+    plt.yscale("log")
+    plt.ylim(plt.ylim()[0],1)
+    plt.ylabel("Normalised probability for each class label")
