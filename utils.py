@@ -79,6 +79,7 @@ def plot_image(data,feature_dict,feature,idx,cmap="hinodesotintensity"):
     plt.imshow(data[feature_dict[feature][idx]],origin="bottom",cmap=cmap)
 
 def plot_hist(hist_dict,feature,idx):
+    hist_dict[feature][idx][np.isnan(hist_dict[feature][idx])] = 1
     plt.bar(np.arange(5),hist_dict[feature][idx],tick_label=["Filaments","Flare ribbon","Prominence","Quiet Sun","Sunspot"])
     plt.yscale("log")
     plt.ylim(plt.ylim()[0],1)
