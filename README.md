@@ -26,6 +26,8 @@ For prediction:
 * `PyTorch 0.4+`
 * `numpy`
 * `matplotlib`
+* `astropy`
+* `scikit-image`
 * `tqdm`
 
 Optional:
