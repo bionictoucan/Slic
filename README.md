@@ -45,7 +45,7 @@ Then we want to train the moddel now that the data has been prepped. We want to 
 
 `python train.py`
 
-followed by any keyword arguments to be passed to the file. The model can also be trained by import `train` and `validate` from `train.py` but will require also importing `solar_classifier` from `model.py` and `solar_dataset` from `dataset.py` and then setting up the PyTorch model and loading the data into a PyTorch DataLoader (all of which is done implicitly when running `train.py`.
+followed by any keyword arguments to be passed to the file. The model can also be trained by import `train` and `validate` from `train.py` but will require also importing `solar_classifier` from `model.py` and `solar_dataset` from `dataset.py` and then setting up the PyTorch model and loading the data into a PyTorch DataLoader (all of which is done implicitly when running `train.py`).
 
 ### Testing
 A Jupyter notebook `testing_example.ipynb` has been provided with this repository to illustrate how to use this classifier for predictions on unseen data. With the release of this code we have included the trained model, a file called `solClass73.pth` which will need to be used to load the model in our example notebook.
