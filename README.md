@@ -37,8 +37,8 @@ Optional:
 ### Training
 The file `data.py` contains a prep function for directories of data which reads in directories of fits files and reshapes the image to 256x256 (the input shape of the network), flattens the image and inserts a value corresponding to the label in that image. This can be done by import the function `train_test_data` from `data.py` or running
 
-`python data.py --dataset "path/to/dataset/" --percent_split 10 --save_dir "path/to/save/"
-`
+`python data.py --dataset "path/to/dataset/" --percent_split 10 --save_dir "path/to/save/"`
+
 The `train_test_data` function will save two `.npz` files [(see documentation here for how the file format works)](https://docs.scipy.org/doc/numpy/reference/generated/numpy.savez_compressed.html#numpy.savez_compressed): one for trainign and one for validation.
 
 Then we want to train the moddel now that the data has been prepped. We want to use the `train.py` file for this. Within `train.py`, we have functions for training and validating the model and an example of how to use these by calling the file as
