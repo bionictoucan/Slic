@@ -30,7 +30,7 @@ def train_test_data(dataset,percentage_split=10,save_dir="./"):
         for (j, image) in tqdm(enumerate(data_list)):
             tmp = getdata(image).astype(np.float64)
             try:
-                for (x,y, pixel) in np.ndenumerate(tmp):
+                for (x,y), pixel in np.ndenumerate(tmp):
                     if tmp[x,y] == 0:
                         raise bad_data() #skip over images with faults in the data
             except bad_data:
