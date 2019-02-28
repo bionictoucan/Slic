@@ -25,9 +25,9 @@ def train_test_data(dataset,percentage_split=10,save_dir="./"):
     train_list, test_list = [], []
 
     for (i,direc) in enumerate(dir_list):
-        data_list = sorted([direc+x for x in os.listdir(direc) if not x.startswith(".")]
+        data_list = sorted([direc+"/"+x for x in os.listdir(direc) if not x.startswith(".")])
 
-        for (j, image) in tqdm(enumerate(data_list)):
+        for (j, image) in tqdm(enumerate(data_list),desc=str(dir_list[i])):
             tmp = getdata(image).astype(np.float64)
             try:
                 for (x,y), pixel in np.ndenumerate(tmp):
@@ -38,7 +38,7 @@ def train_test_data(dataset,percentage_split=10,save_dir="./"):
             tmp = imresize(tmp,(256,256),interp="bicubic") #resizes the images to 256x256 pixels using bicubic interpolation
             tmp = tmp.flatten() #flatten the image to a 1D vector for easier storage in the .npz file
             tmp = np.insert(tmp,0,i)
-            if (j+1 % percentage_split) == 0:
+            if (j % percentage_split) == 0:
                 test_list.append(tmp)
             else:
                 train_list.append(tmp)
