@@ -12,7 +12,7 @@ def train(model,device,data_loader,optimiser,epoch,criterion):
     model.to(device)
     model.train()
 
-    for i, (images, labels) in enumerate(data_loader):
+    for i, (images, labels) in tqdm(enumerate(data_loader),desc="Epoch no."+str(epoch)):
         images, labels = images.float().to(device), labels.long().to(device) #casts the tensors to the GPU if available
         optimiser.zero_grad() #must zero the gradients in the optimiser since backward() accumulates gradients and this stops mixing of values between batches
         output = model(images) #feeds the data through the network

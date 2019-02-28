@@ -11,7 +11,7 @@ class confusion_matrix():
     '''
 
     def __init__(self,val_set=None,model=None):
-        dev = torch.load("cuda:0" if torch.cuda.is_available() else "cpu")
+        dev = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         solar_c = solar_classifier().to(dev)
         solar_c.load_state_dict(torch.load(model))
         solar_c.eval()

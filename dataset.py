@@ -72,7 +72,7 @@ def parse_dataset(dataset):
     
             sol_list.append(solar_dataset(source="numpy",data_arr=dataset.data[args],label_arr=dataset.label[args]))
 
-            return sol_list
+        return sol_list
     elif type(dataset) == str:
         s_dataset = solar_dataset(source="from_file",dat_file=dataset)
 
@@ -81,4 +81,4 @@ def parse_dataset(dataset):
 
             sol_list.append(solar_dataset(source="numpy",data_arr=s_dataset.data[args],label_arr=s_dataset.label[args]))
 
-            return sol_list
+        return sol_list
