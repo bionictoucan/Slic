@@ -11,7 +11,9 @@ The grey block at the end is the classifier and consists of two fully-connected 
 
 The output of the network is likelihood of the image containing a specific feature which is then modelled by the softmax distribution to give us the feature it is most likely to contain.
 
-$$ p (x_{i}) = \frac{\exp x_{i}}{\sum_{k} \exp x_{k}} $$
+\begin{equation}
+p (x_{i}) = \frac{\exp x_{i}}{\sum_{k} \exp x_{k}}
+\end{equation}
 
 The initial training of Slic is done on H&alpha; &lambda;6563&#8491; data from Hinode/SOT (Solar Optical Telescope; [data available here](http://sdc.uio.no/sdc/)) and the training set consists of 13175 images split 90% to 10% for training to validation consisting of five features: filaments, flare ribbons, prominences, sunspots and the quiet Sun (i.e. the lack of any of the other four features).
 
