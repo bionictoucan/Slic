@@ -64,7 +64,7 @@ followed by any keyword arguments to be passed to the file. The model can also b
 ### Testing
 A Jupyter notebook `testing_example.ipynb` has been provided with this repository to illustrate how to use this classifier for predictions on unseen data. With the release of this code we have included the trained model, a file called `sol_class_4.pth` which will need to be used to load the model in our example notebook.
 
-![flareim](examples/6563flareim.png | width=100) ![flareprob](examples/6563flareprob.png | width=100)
+![flareim](examples/6563flareim.png =250x250) ![flareprob](examples/6563flareprob.png | width=100)
 
 ### Release
 We have included the pre-trained model with >99% accuracy - `sol_class_4.pth`. Alongside the prepped training and validation set that we used - named `solar_train_data.npz` and `solar_test_data.npz`, repectively.
