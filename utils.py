@@ -83,4 +83,4 @@ def plot_hist(hist_dict,feature,idx):
     plt.bar(np.arange(5),hist_dict[feature][idx],tick_label=["Filaments","Flare ribbon","Prominence","Quiet Sun","Sunspot"])
     plt.yscale("log")
     plt.ylim(plt.ylim()[0],1)
-    plt.ylabel("Normalised probability for each class label")
+    plt.ylabel("Normalised probability")
