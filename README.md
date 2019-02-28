@@ -64,6 +64,8 @@ followed by any keyword arguments to be passed to the file. The model can also b
 ### Testing
 A Jupyter notebook `testing_example.ipynb` has been provided with this repository to illustrate how to use this classifier for predictions on unseen data. With the release of this code we have included the trained model, a file called `sol_class_4.pth` which will need to be used to load the model in our example notebook.
 
+An example of classification is shown below.
+
 <img src="examples/6563flareim.png" width="400" /> <img src="examples/6563flareprob.png" width="400" />
 
 ### Release
