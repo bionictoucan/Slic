@@ -84,3 +84,43 @@ def plot_hist(hist_dict,feature,idx):
     plt.yscale("log")
     plt.ylim(plt.ylim()[0],1)
     plt.ylabel("Normalised probability")
+    
+# def plots(data,feature_dict,hist_dict,feature,idx,cmap="hinodesotintensity"):
+#     if len(data.shape) == 4:
+#         data = data.squeeze() #get rid of batch dimension
+        
+#     num_im = data.shape[0]
+#     fig = plt.figure()
+#     for j, image in enumerate(data):
+        
+class classification:
+    def __init__(self,fits_pth,weights):
+        self.files = sorted([fits_pth+x for x in os.listdir(fits_pth)]) #this assumes that the fits files are named sensibly
+        self.weights = weights
+        self.class_dict = {}
+        self.hist_dict = {}
+        self.label_dict = {
+            "filaments" : 0,
+            "flares" : 1,
+            "prominences" : 2,
+            "quiet" : 3,
+            "sunspots" : 4
+        }
+
+    def solar_classification(self,features=None,freedom=False):
+        im_arr = np.zeros(len(self.files),1,256,256) #this sets up the array of images to be classified
+
+        for i, image in enumerate(self.files):
+            tmp = getdata(image).astype(np.float64)
+            tmp = resize(tmp,(256,256),anti_aliasing=True)
+            tmp = tmp.reshape(1,256,256)
+            im_arr[i] = tmp
+
+        dataset = solar_dataset(source="numpy",data_arr=im_arr,test=True)
+        idxs = np.zeros(dataset.__len__())
+        labels = np.zeros(dataset.__len__())
+        hists = np.zeros((dataset.__len__(),5))
+        data_loader = DataLoader(dataset,batch_size=1)
+        device = ("cuda:0" if torhc.cuda.is_available() else "cpu")
+
+        
