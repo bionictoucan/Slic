@@ -68,14 +68,14 @@ class Classification:
             tmp = tmp.reshape(1,256,256)
             im_arr[i] = tmp
 
-        dataset = solar_dataset(source="numpy",data_arr=im_arr,test=True)
+        dataset = Solar_Dataset(source="numpy",data_arr=im_arr,test=True)
         idxs = np.zeros(dataset.__len__())
         labels = np.zeros(dataset.__len__())
         hists = np.zeros((dataset.__len__(),5))
         data_loader = DataLoader(dataset,batch_size=1)
         device = ("cuda:0" if torch.cuda.is_available() else "cpu")
 
-        model = solar_classifier()
+        model = Solar_Classifier()
         model.to(device)
         model.load_state_dict(torch.load(self.weights,map_location=device))
         model.eval()

@@ -5,7 +5,7 @@ from model import solar_classifier
 import torch
 from torch.utils.data import DataLoader
 
-class confusion_matrix():
+class Confusion_Matrix():
     '''
     A class to store the confusion matrix, its features and the associated statistics that go along with it.
     '''
