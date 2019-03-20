@@ -57,7 +57,7 @@ class Solar_Classifier(nn.Module):
         )
 
         for m in self.modules():
-            if not solar_classifier:
+            if not Solar_Classifier:
                 kaiming_normal_(m.weight,nonlinearity="relu")
 
     def forward(self,x):
