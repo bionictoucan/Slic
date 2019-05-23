@@ -79,4 +79,4 @@ An example of classification is shown below.
 We have included the pre-trained model with >99% accuracy - `sol_class_4.pth`. Alongside the prepped training and validation set that we used - named `solar_train_data.npz` and `solar_test_data.npz`, repectively.
 
 ## Publications
-"Slic: Solar image classification using convolutional neural networks", **J.A. Armstrong** and L. Fletcher, (2019, in prep).
+"Fast Solar Image Classification Using Deep Learning and its Importance for Automation in Solar Physics", **J.A. Armstrong** and L. Fletcher, *Solar Physics*, (2019, accepted).
