@@ -40,11 +40,11 @@ if __name__ == "__main__":
     parser.add_argument("--n_epochs",help="The number of epochs to train for.",default=100,type=int)
     parser.add_argument("--batch_size",help="The batch size to use for training and validation.",default=2,type=int)
     parser.add_argument("--no_gpu",help="Don't use the GPU.",dest='use_gpu',action='store_false')
-    parser.add_argument("--no_dataparallel",help="Don't use DataParallel when multiple GPUs are present",dest='use_dataparallel',action='store_false')
+    parser.add_argument("--use_dataparallel",help="Use DataParallel to parallelise across multiple GPUs.",dest='use_dataparallel',action='store_true')
     parser.add_argument("--train_data",help="The path to the training data.",default="./solar_train_data.npz")
     parser.add_argument("--val_data",help="The path to the validation data.",default="./solar_test_data.npz")
     parser.add_argument("--save_dir",help="The directory to save the models from each epoch.",default="./")
-    parser.set_defaults(use_gpu=True, use_dataparallel=True)
+    parser.set_defaults(use_gpu=True, use_dataparallel=False)
     args = parser.parse_args()
 
     device = torch.device("cuda:0" if torch.cuda.is_available() and args.use_gpu else "cpu")
