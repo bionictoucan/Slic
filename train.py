@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 import numpy as np
-from dataset import solar_dataset
-from model import solar_classifier
+from dataset import Solar_Dataset
+from model import Solar_Classifier
 import argparse
 from tqdm import tqdm
 
@@ -36,17 +36,23 @@ def validate(model,device,data_loader,epoch,test_losses):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lr",help="The learning rate for the network.",default=0.0001)
-    parser.add_argument("--n_epochs",help="The number of epochs to train for.",default=100)
-    parser.add_argument("--batch_size",help="The batch size to use for training and validation.",default=2)
-    parser.add_argument("--use_gpu",help="Whether or not to use the GPU if it exists.",default=True)
+    parser.add_argument("--lr",help="The learning rate for the network.",default=0.0001,type=float)
+    parser.add_argument("--n_epochs",help="The number of epochs to train for.",default=100,type=int)
+    parser.add_argument("--batch_size",help="The batch size to use for training and validation.",default=2,type=int)
+    parser.add_argument("--no_gpu",help="Don't use the GPU.",dest='use_gpu',action='store_false')
+    parser.add_argument("--use_dataparallel",help="Use DataParallel to parallelise across multiple GPUs.",dest='use_dataparallel',action='store_true')
     parser.add_argument("--train_data",help="The path to the training data.",default="./solar_train_data.npz")
     parser.add_argument("--val_data",help="The path to the validation data.",default="./solar_test_data.npz")
     parser.add_argument("--save_dir",help="The directory to save the models from each epoch.",default="./")
+    parser.set_defaults(use_gpu=True, use_dataparallel=False)
     args = parser.parse_args()
 
-    device = torch.device("cuda:0" if torch.cuda.is_available and args.use_gpu else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() and args.use_gpu else "cpu")
     sol_clas = Solar_Classifier() #creates an instance of the solar classification network
+    if args.use_gpu and torch.cuda.device_count() > 1 and args.use_dataparallel:
+        print("Using %d GPUs!" % torch.cuda.device_count())
+        sol_clas = nn.DataParallel(sol_clas)
+
     criterion = nn.CrossEntropyLoss()
     optimiser = optim.SGD(sol_clas.parameters(),args.lr,momentum=0.9,nesterov=True)
 
