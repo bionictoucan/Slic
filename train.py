@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_dir",help="The directory to save the models from each epoch.",default="./")
     args = parser.parse_args()
 
-    device = torch.device("cuda:0" if torch.cuda.is_available and args.use_gpu else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() and args.use_gpu else "cpu")
     sol_clas = Solar_Classifier() #creates an instance of the solar classification network
     criterion = nn.CrossEntropyLoss()
     optimiser = optim.SGD(sol_clas.parameters(),args.lr,momentum=0.9,nesterov=True)
