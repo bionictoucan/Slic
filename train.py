@@ -49,9 +49,8 @@ if __name__ == "__main__":
 
     device = torch.device("cuda:0" if torch.cuda.is_available() and args.use_gpu else "cpu")
     sol_clas = Solar_Classifier() #creates an instance of the solar classification network
-    numDevs = torch.cuda.device_count()
-    if numDevs > 1 and args.use_dataparallel:
-        print("Using %d GPUs!" % numDevs)
+    if args.use_gpu and torch.cuda.device_count() > 1 and args.use_dataparallel:
+        print("Using %d GPUs!" % torch.cuda.device_count())
         sol_clas = nn.DataParallel(sol_clas)
 
     criterion = nn.CrossEntropyLoss()
