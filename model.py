@@ -4,7 +4,7 @@ from torch.nn.init import kaiming_normal_
 
 class SolarClassifier(nn.Module):
     def __init__(self):
-        super(Solar_Classifier,self).__init__()
+        super().__init__()
         self.max_pool = nn.MaxPool2d(kernel_size=2,stride=2)
         self.layer1 = nn.Sequential(
             nn.Conv2d(1,64,kernel_size=3,padding=1),

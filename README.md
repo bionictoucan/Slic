@@ -79,4 +79,4 @@ An example of classification is shown below.
 We have included the pre-trained model with >99% accuracy - `sol_class_4.pth`. Alongside the prepped training and validation set that we used - named `solar_train_data.npz` and `solar_test_data.npz`, repectively.
 
 ## Publications
-"Fast Solar Image Classification Using Deep Learning and its Importance for Automation in Solar Physics", **J.A. Armstrong** and L. Fletcher, *Solar Physics*, (2019, accepted).
+["Fast Solar Image Classification Using Deep Learning and its Importance for Automation in Solar Physics"](https://link.springer.com/article/10.1007%2Fs11207-019-1473-z), **J.A. Armstrong** and L. Fletcher, *Solar Physics*, vol. 294:80, (2019). [[doi]](https://doi.org/10.1007/s11207-019-1473-z) [arXiv](https://arxiv.org/abs/1905.13575)
