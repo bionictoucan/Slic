@@ -1,11 +1,6 @@
 import torch
-<<<<<<< HEAD
 from dataset import SolarDataset
 from model import SolarClassifier
-=======
-from dataset import Solar_Dataset
-from model import Solar_Classifier
->>>>>>> 93fdf38f917daec0d142d0be8c9ecbd38377703e
 from torch.utils.data import DataLoader
 import numpy as np
 from tqdm import tqdm
