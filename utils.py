@@ -1,6 +1,6 @@
 import torch
-from dataset import solar_dataset
-from model import solar_classifier
+from dataset import SolarDataset
+from model import SolarClassifier
 from torch.utils.data import DataLoader
 import numpy as np
 from tqdm import tqdm
@@ -68,14 +68,14 @@ class Classification:
             tmp = tmp.reshape(1,256,256)
             im_arr[i] = tmp
 
-        dataset = Solar_Dataset(source="numpy",data_arr=im_arr,test=True)
+        dataset = SolarDataset(source="numpy",data_arr=im_arr,test=True)
         idxs = np.zeros(dataset.__len__())
         labels = np.zeros(dataset.__len__())
         hists = np.zeros((dataset.__len__(),5))
         data_loader = DataLoader(dataset,batch_size=1)
         device = ("cuda:0" if torch.cuda.is_available() else "cpu")
 
-        model = Solar_Classifier()
+        model = SolarClassifier()
         model.to(device)
         model.load_state_dict(torch.load(self.weights,map_location=device))
         model.eval()

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from torch.nn.init import kaiming_normal_
 
-class Solar_Classifier(nn.Module):
+class SolarClassifier(nn.Module):
     def __init__(self):
         super(Solar_Classifier,self).__init__()
         self.max_pool = nn.MaxPool2d(kernel_size=2,stride=2)

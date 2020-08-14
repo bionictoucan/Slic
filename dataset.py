@@ -1,7 +1,7 @@
 import numpy as np
 from torch.utils.data import Dataset
 
-class Solar_Dataset(Dataset):
+class SolarDataset(Dataset):
     def __init__(self,source="from_file",dat_file=None,data_arr=None,label_arr=None,test=False):
         super(solar_dataset,self).__init__()
         self.test = test

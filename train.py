@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 import numpy as np
-from dataset import solar_dataset
-from model import solar_classifier
+from dataset import SolarDataset
+from model import SolarClassifier
 import argparse
 from tqdm import tqdm
 
@@ -46,15 +46,15 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     device = torch.device("cuda:0" if torch.cuda.is_available and args.use_gpu else "cpu")
-    sol_clas = Solar_Classifier() #creates an instance of the solar classification network
+    sol_clas = SolarClassifier() #creates an instance of the solar classification network
     criterion = nn.CrossEntropyLoss()
     optimiser = optim.SGD(sol_clas.parameters(),args.lr,momentum=0.9,nesterov=True)
 
     test_losses = []
-    train_dataset = Solar_Dataset(dat_file=args.train_data)
+    train_dataset = SolarDataset(dat_file=args.train_data)
     train_loader = DataLoader(dataset=train_dataset,batch_size=args.batch_size,shuffle=True)
-    val_dataset = Solar_Dataset(dat_file=args.val_data)
-    val_loader = DataLoader(dataset=args.val_data,batch_size=args.batch_size,shuffle=True)
+    val_dataset = SolarDataset(dat_file=args.val_data)
+    val_loader = DataLoader(dataset=val_dataset,batch_size=args.batch_size,shuffle=True)
     del(train_dataset,val_dataset)
 
     for i in tqdm(range(1,args.n_epochs+1)):
